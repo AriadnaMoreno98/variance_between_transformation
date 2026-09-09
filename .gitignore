@@ -1,0 +1,26 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.eggs/
+build/
+dist/
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Jupyter
+.ipynb_checkpoints/
+
+# Experiment and analysis outputs (regenerated locally by
+# scripts/run_experiment.py and notebooks/analysis.ipynb; the committed
+# notebook already carries the tables/figures as executed cell outputs)
+results/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
