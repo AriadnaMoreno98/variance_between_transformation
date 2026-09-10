@@ -45,8 +45,6 @@ tactic/platform, or is it a sub-technique?).
 - `scripts/run_experiment.py` — runs the full sweep (6 transformations ×
   k ∈ {50, 100, 200} × 25 tasks, 5-fold stratified cross-validation),
   producing one CSV per combination
-- `notebooks/analysis.ipynb` — aggregates the raw per-fold CSVs into the
-  comparative tables and figures reported in the paper
 
 ## Reproducing the experiments
 
@@ -65,9 +63,6 @@ tactic/platform, or is it a sub-technique?).
    This produces one CSV per `(task, transformation, k)` combination in
    `results/runs/`. It is resumable: a combination already computed is
    skipped on a re-run.
-
-4. Run `notebooks/analysis.ipynb` to aggregate the raw results into the
-   comparative tables and figures reported in the paper.
 
 The pipeline reproduces the paper's reported MML results: feature
 selection via **dMeans** and the **six 2D transformations** listed above,

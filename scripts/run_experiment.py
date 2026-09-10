@@ -19,6 +19,7 @@ from src.baselines.baseline_pipeline import BaselinePipeline
 from src.evaluation.metrics import compute_classification_metrics
 from src.transformations.transformations import (
     VarianceBetweenProjection,
+    VarianceBetweenBalancedProjection,
     DiscriminativeProjection,
     PolarityProjection,
     WeightedProjection,
@@ -29,9 +30,13 @@ from src.transformations.transformations import (
 DATA_PATH = PROJECT_ROOT / "data"
 
 # Las 6 transformaciones estudiadas en el paper (variance_between es la
-# propuesta nueva; el resto son las transformaciones MML con las que se compara).
+# propuesta nueva; el resto son las transformaciones MML con las que se compara),
+# mas variance_between_balanced: variante exploratoria de variance_between con
+# normalizacion por dispersion intra-clase estilo Cohen's d (ver Seccion 11 de
+# notebooks/analysis.ipynb).
 TRANSFORMATIONS = {
     "variance_between": VarianceBetweenProjection,
+    "variance_between_balanced": VarianceBetweenBalancedProjection,
     "discriminative": DiscriminativeProjection,
     "polarity": PolarityProjection,
     "weighted": WeightedProjection,

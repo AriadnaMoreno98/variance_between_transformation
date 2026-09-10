@@ -14,9 +14,11 @@ env/
 # Jupyter
 .ipynb_checkpoints/
 
+# Internal analysis notebook (not part of the public reproducibility package)
+notebooks/
+
 # Experiment and analysis outputs (regenerated locally by
-# scripts/run_experiment.py and notebooks/analysis.ipynb; the committed
-# notebook already carries the tables/figures as executed cell outputs)
+# scripts/run_experiment.py and notebooks/analysis.ipynb)
 results/
 
 # OS / editor

@@ -130,6 +130,40 @@ class VarianceBetweenProjection(BaseTransformation):
         return np.column_stack((z1, z2))
 
 
+class VarianceBetweenBalancedProjection(BaseTransformation):
+    """v y w normalizados por dispersion intra-clase (estilo Cohen's d),
+    en vez de diferencia cruda. z1 = proyeccion sobre v, z2 = proyeccion sobre w."""
+
+    def __init__(self, epsilon=1e-8):
+        self.epsilon = epsilon
+        self.v = None
+        self.w = None
+
+    def fit(self, X_train, y_train):
+        X_train = np.asarray(X_train)
+        y_train = np.asarray(y_train)
+
+        X0 = X_train[y_train == 0]
+        X1 = X_train[y_train == 1]
+
+        std0 = X0.std(axis=0)
+        std1 = X1.std(axis=0)
+        denom = std0 + std1 + self.epsilon
+
+        w = (X1.mean(axis=0) - X0.mean(axis=0)) / denom
+        v = (std1 - std0) / denom
+
+        self.v = v / (np.linalg.norm(v) + self.epsilon)
+        self.w = w / (np.linalg.norm(w) + self.epsilon)
+        return self
+
+    def transform(self, X):
+        X = np.asarray(X)
+        z1 = X @ self.v
+        z2 = X @ self.w
+        return np.column_stack((z1, z2))
+
+
 class CentroidDistanceProjection(BaseTransformation):
     """z1 = distancia euclidiana de cada muestra a mean1,
     z2 = distancia euclidiana de cada muestra a mean0."""
